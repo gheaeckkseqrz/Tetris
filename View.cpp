@@ -5,7 +5,7 @@
 // Login   <pierre.wilmot@gmail.com>
 // 
 // Started on  Fri Jul 27 13:59:57 2012 Pierre WILMOT
-// Last update Sun Aug  5 23:16:37 2012 Pierre WILMOT
+// Last update Mon Aug  6 16:47:35 2012 Pierre WILMOT
 //
 
 #include	<iostream>
@@ -19,7 +19,7 @@ View::View()
   m_colors[Colors::Green] = sf::Color::Green;
   m_colors[Colors::Blue] = sf::Color::Blue;
   m_colors[Colors::Yellow] = sf::Color::Yellow;
-
+  m_colors[Colors::Gray] = sf::Color(127, 127, 127);
 }
 
 View::~View()

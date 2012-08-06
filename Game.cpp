@@ -66,7 +66,7 @@ void			Game::display() const
   for (unsigned int x(0) ; x < m_width ; ++x)
     for (unsigned int y(0) ; y < m_heigt ; ++y)
       {
-	m_view.drawBloc(x, y, Colors::Blue);
+	m_view.drawBloc(x, y, Colors::Gray);
 	if (m_map[x][y] != Colors::None)
 	  m_view.drawBloc(x, y, m_map[x][y]);
       }

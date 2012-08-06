@@ -5,7 +5,7 @@
 // Login   <pierre.wilmot@gmail.com>
 // 
 // Started on  Thu Jul 26 23:54:08 2012 Pierre WILMOT
-// Last update Sat Aug  4 03:35:04 2012 Pierre WILMOT
+// Last update Mon Aug  6 16:20:31 2012 Pierre WILMOT
 //
 
 #ifndef __PIECE_HPP__
@@ -51,6 +51,7 @@ private:
   unsigned int		m_maxY;
   bool			**m_shape;
   Colors::e_color	m_color;
+  std::string		m_pieces[7];
 };
 
 #endif

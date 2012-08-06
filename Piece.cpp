@@ -17,6 +17,15 @@ Piece::Piece()
   m_shape = new bool*[MAX_WIDTH];
   for (int i(0) ; i < MAX_WIDTH ; ++i)
     m_shape[i] = new bool[MAX_HEIGT];
+
+  m_pieces[0] = ("11000110000000000000");
+  m_pieces[1] = ("10000110001000000000");
+  m_pieces[2] = ("10000110000100000000");
+  m_pieces[3] = ("01000110001000000000");
+  m_pieces[4] = ("11000100001000000000");
+  m_pieces[5] = ("10000100001100000000");
+  m_pieces[6] = ("11111000000000000000");
+
   reset();
 }
 
@@ -56,28 +65,25 @@ void		Piece::setY(unsigned int y)
 
 void		Piece::reset()
 {
+  int	r;
+
+  m_x = 0;
+  m_y = 0;
+
   for (int i(0) ; i < MAX_WIDTH ; ++i)
     for (int j(0) ; j < MAX_HEIGT ; ++j)
       m_shape[i][j] = false;
 
-  m_shape[0][0] = true;
-  m_shape[0][1] = true;
-  m_shape[1][0] = true;
-  if (Random::rand(0, 1) == 0)
-    {
-      m_shape[1][1] = true;
-      m_color = Colors::Red;
-      m_maxX = 2;
-      std::cout << "Creating a Square" << std::endl;
-    }
-  else
-    {
-      m_shape[2][0] = true;
-      m_color = Colors::Green;
-      m_maxX = 3;
-      std::cout << "Creating a L" << std::endl;
-    }
-  m_maxY = 2;
+  r = Random::rand(0, 6);
+
+  for (int i(0) ; i < MAX_WIDTH ; ++i)
+    for (int j(0) ; j < MAX_HEIGT ; ++j)
+      {
+	if (m_pieces[r][i * MAX_HEIGT + j] == '1')
+	  m_shape[i][j] = true;
+      }
+  calcMaximuns();
+  m_color = Colors::Red;
 }
 
 void		Piece::display(IView &v, unsigned int yLimit) const
