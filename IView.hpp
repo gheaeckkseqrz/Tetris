@@ -5,7 +5,7 @@
 // Login   <pierre.wilmot@gmail.com>
 // 
 // Started on  Fri Jul 27 01:53:52 2012 Pierre WILMOT
-// Last update Sat Jul 28 00:58:15 2012 Pierre WILMOT
+// Last update Sun Aug  5 02:40:13 2012 Pierre WILMOT
 //
 
 #ifndef __IVIEW_HPP__
@@ -13,9 +13,6 @@
 
 #include	<iostream>
 #include	"Colors.hpp"
-
-#define	WIN_X_PX	500
-#define	WIN_Y_PX	500
 
 class IView
 {

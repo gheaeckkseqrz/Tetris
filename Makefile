@@ -1,18 +1,21 @@
 NAME	=	Tetris
 
 SRC	=	main.cpp			\
+		Controler.cpp			\
 		Game.cpp			\
 		GameData.cpp			\
+		Mutex.cpp			\
 		Options.cpp			\
 		Piece.cpp			\
 		Random.cpp			\
+		Threadable.cpp			\
 		View.cpp
 
 OBJ	=	$(SRC:.cpp=.o)
 
 INCLUDE	=
 
-LIB	=	-lsfml-graphics -lsfml-window -lsfml-system
+LIB	=	-lsfml-graphics -lsfml-window -lsfml-system -lpthread
 
 CC	=	g++
 

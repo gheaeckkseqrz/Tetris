@@ -5,7 +5,7 @@
 // Login   <pierre.wilmot@gmail.com>
 // 
 // Started on  Thu Jul 26 23:39:34 2012 Pierre WILMOT
-// Last update Fri Jul 27 00:19:17 2012 Pierre WILMOT
+
 //
 
 #include	<iostream>
@@ -14,10 +14,10 @@
 GameData::  GameData(unsigned int heigt, unsigned int width)
   : m_heigt(heigt), m_width(width)
 {
-  m_map = new std::vector<Piece::e_color>[width];
+  m_map = new std::vector<Colors::e_color>[width];
 
   for (unsigned int i(0) ; i < m_width ; ++i)
-    m_map[i].insert(m_map[i].begin(), m_heigt + MAX_HEIGT, Piece::None);
+    m_map[i].insert(m_map[i].begin(), m_heigt + MAX_HEIGT, Colors::None);
 }
 
 GameData::~GameData()
