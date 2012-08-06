@@ -12,7 +12,7 @@
 #include	"GameData.hpp"
 
 GameData::  GameData(unsigned int heigt, unsigned int width)
-  : m_heigt(heigt), m_width(width)
+  : m_heigt(heigt), m_width(width), m_score(0)
 {
   m_map = new std::vector<Colors::e_color>[width];
 

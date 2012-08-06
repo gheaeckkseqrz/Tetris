@@ -5,7 +5,7 @@
 // Login   <pierre.wilmot@gmail.com>
 // 
 // Started on  Fri Jul 27 01:53:52 2012 Pierre WILMOT
-// Last update Sun Aug  5 02:40:13 2012 Pierre WILMOT
+// Last update Mon Aug  6 19:30:40 2012 Pierre WILMOT
 //
 
 #ifndef __IVIEW_HPP__
@@ -19,7 +19,7 @@ class IView
 public:
   virtual void		clear() = 0;
   virtual void		refresh() = 0;
-  virtual void		drawBloc(int x, int y, Colors::e_color) = 0;
+  virtual void		drawBloc(int x, int y, Colors::e_color, bool border = true) = 0;
   virtual void		setScore(unsigned int score) = 0;
 };
 

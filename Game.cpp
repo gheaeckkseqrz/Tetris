@@ -30,7 +30,7 @@ int		       	Game::play()
       if (m_falling == false)
 	addNewPiece();
       if (pieceCanFall())
-      	applyFalling();
+	applyFalling();
       else
 	{
 	  fixPiece();
@@ -49,8 +49,8 @@ int		       	Game::play()
 
 bool			Game::pieceCanFall() const
 {
-  for (unsigned int i(0) ; i < m_piece.getMaxX() ; ++i)
-    for (unsigned int j(0) ; j < m_piece.getMaxY() ; ++j)
+  for (unsigned int i(m_piece.getMinX()) ; i < m_piece.getMaxX() ; ++i)
+    for (unsigned int j(m_piece.getMinY()) ; j < m_piece.getMaxY() ; ++j)
       {
 	if (m_piece.getBloc(i, j) && (j + m_piece.getY()) <= 0)
 	  return (false);
@@ -66,7 +66,6 @@ void			Game::display() const
   for (unsigned int x(0) ; x < m_width ; ++x)
     for (unsigned int y(0) ; y < m_heigt ; ++y)
       {
-	m_view.drawBloc(x, y, Colors::Gray);
 	if (m_map[x][y] != Colors::None)
 	  m_view.drawBloc(x, y, m_map[x][y]);
       }
@@ -110,10 +109,7 @@ void			Game::fixPiece()
 void			Game::movePiece(IControler::e_action a)
 {
   if (!pieceCanMove(a))
-    {
-      std::cout << "FAIL" << std::endl;
-      return;
-    }
+    return;
   switch (a)
     {
     case IControler::None :
@@ -167,12 +163,12 @@ bool		Game::pieceCanMove(IControler::e_action a) const
     }
   else if (a == IControler::Left)
     {
-      if (m_piece.getX() <= 0)
+      if (m_piece.getX() + m_piece.getMinX() <= 0)
 	return (false);
       d = -1;
     }
-  for (unsigned int i(0) ; i < m_piece.getMaxX() ; ++i)
-    for (unsigned int j(0) ; j < m_piece.getMaxY() ; ++j)
+  for (unsigned int i(m_piece.getMinX()) ; i < m_piece.getMaxX() ; ++i)
+    for (unsigned int j(m_piece.getMaxX()) ; j < m_piece.getMaxY() ; ++j)
       {
 	if (m_piece.getBloc(i, j) && m_map[i + m_piece.getX() + d][j + m_piece.getY()] != Colors::None)
 	  return (false);
@@ -186,19 +182,14 @@ bool		Game::pieceCanRotate() const
 
   test = m_piece;
   test.rotate();
-  if (m_piece.getX() + test.getMaxX() >= m_width)
-    {
-      std::cout << "Cant Rotate" << std::endl;
-      return (false);
-    }
-  for (unsigned int i(0) ; i < test.getMaxX() ; ++i)
-    for (unsigned int j(0) ; j < test.getMaxY() ; ++j)
+  if (m_piece.getX() + test.getMaxX() >= m_width
+      || m_piece.getX() + (int)test.getMinX() < 0)
+    return (false);
+  for (unsigned int i(test.getMinX()) ; i < test.getMaxX() ; ++i)
+    for (unsigned int j(test.getMinY()) ; j < test.getMaxY() ; ++j)
       {
 	if (test.getBloc(i, j) && m_map[i + m_piece.getX()][j + m_piece.getY()] != Colors::None)
-	  {
-	    std::cout << "Cant Rotate" << std::endl;
-	    return (false);
-	  }
+	  return (false);
       }
   return (true);
 }

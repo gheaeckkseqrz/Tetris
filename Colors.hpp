@@ -5,7 +5,7 @@
 // Login   <pierre.wilmot@gmail.com>
 // 
 // Started on  Sat Jul 28 00:09:35 2012 Pierre WILMOT
-// Last update Mon Aug  6 16:26:45 2012 Pierre WILMOT
+// Last update Mon Aug  6 19:22:06 2012 Pierre WILMOT
 //
 
 #ifndef	__COLORS_HPP__
@@ -22,6 +22,9 @@ public:
       Blue,
       Yellow,
       Gray,
+      Orange,
+      Pink,
+      Purple,
       Max_Color
     };
 };

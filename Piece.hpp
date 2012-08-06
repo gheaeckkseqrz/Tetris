@@ -5,7 +5,7 @@
 // Login   <pierre.wilmot@gmail.com>
 // 
 // Started on  Thu Jul 26 23:54:08 2012 Pierre WILMOT
-// Last update Mon Aug  6 16:20:31 2012 Pierre WILMOT
+// Last update Mon Aug  6 19:18:55 2012 Pierre WILMOT
 //
 
 #ifndef __PIECE_HPP__
@@ -24,11 +24,13 @@ public:
   Piece();
   ~Piece();
 
-  unsigned int		getX() const;
+  int			getX() const;
   unsigned int		getY() const;
 
   unsigned int		getMaxX() const;
   unsigned int		getMaxY() const;
+  unsigned int		getMinX() const;
+  unsigned int		getMinY() const;
 
   void			setX(unsigned int x);
   void			setY(unsigned int y);
@@ -45,13 +47,16 @@ public:
   Piece			&operator=(const Piece &m);
 
 private:
-  unsigned int		m_x;
+  int			m_x;
   unsigned int		m_y;
+  unsigned int		m_minX;
+  unsigned int		m_minY;
   unsigned int		m_maxX;
   unsigned int		m_maxY;
   bool			**m_shape;
   Colors::e_color	m_color;
   std::string		m_pieces[7];
+  Colors::e_color	m_colordList[7];
 };
 
 #endif

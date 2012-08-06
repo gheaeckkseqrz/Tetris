@@ -26,6 +26,14 @@ Piece::Piece()
   m_pieces[5] = ("10000100001100000000");
   m_pieces[6] = ("11111000000000000000");
 
+  m_colordList[0] = Colors::Red;
+  m_colordList[1] = Colors::Green;
+  m_colordList[2] = Colors::Blue;
+  m_colordList[3] = Colors::Yellow;
+  m_colordList[4] = Colors::Orange;
+  m_colordList[5] = Colors::Pink;
+  m_colordList[6] = Colors::Purple;
+
   reset();
 }
 
@@ -33,7 +41,7 @@ Piece::~Piece()
 {
 }
 
-unsigned int	Piece::getX() const
+int		Piece::getX() const
 {
   return (m_x);
 }
@@ -51,6 +59,16 @@ unsigned int	Piece::getMaxX() const
 unsigned int	Piece::getMaxY() const
 {
   return (m_maxY);
+}
+
+unsigned int	Piece::getMinX() const
+{
+  return (m_minX);
+}
+
+unsigned int	Piece::getMinY() const
+{
+  return (m_minY);
 }
 
 void		Piece::setX(unsigned int x)
@@ -83,7 +101,7 @@ void		Piece::reset()
 	  m_shape[i][j] = true;
       }
   calcMaximuns();
-  m_color = Colors::Red;
+  m_color = m_colordList[r];
 }
 
 void		Piece::display(IView &v, unsigned int yLimit) const
@@ -92,7 +110,7 @@ void		Piece::display(IView &v, unsigned int yLimit) const
     {
       for (int j(0) ; j < MAX_HEIGT ; ++j)
 	{
-	  if (m_shape[i][j] && (j + m_y) < yLimit)
+if (m_shape[i][j] && (j + m_y) < yLimit)
 	    v.drawBloc(i + m_x, j + m_y, m_color);
 	}
     }
@@ -112,8 +130,6 @@ Colors::e_color	Piece::getColor() const
 
 Piece		&Piece::operator=(const Piece &m)
 {
-  std::cout << "Piece = operator " << std::endl;
-
   for (int i(0) ; i < MAX_WIDTH ; ++i)
     for (int j(0) ; j < MAX_WIDTH ; ++j)
       m_shape[i][j] = m.getBloc(i, j);
@@ -147,21 +163,21 @@ void		Piece::rotate()
 
 void		Piece::calcMaximuns()
 {
+  m_minX = MAX_WIDTH;
+  m_minY = MAX_HEIGT;
   m_maxY = 0;
-
   for (unsigned int i(0) ; i < MAX_WIDTH ; ++i)
     for (unsigned int j(0) ; j < MAX_HEIGT ; ++j)
       {
 	if (m_shape[i][j])
 	  {
-	    std::cout << "There is a bloc in " << i << " | " << j << std::endl;
 	    m_maxX = i;
 	    if (j > m_maxY)
 	      m_maxY = j;
+	    m_minX = (i < m_minX) ? i : m_minX;
+	    m_minY = (j < m_minY) ? j : m_minY;
 	  }
       }
   m_maxX++;
   m_maxY++;
-  std::cout << "MaxX : " << m_maxX << std::endl;
-  std::cout << "MaxY : " << m_maxY << std::endl;
 }
