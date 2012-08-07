@@ -41,6 +41,7 @@ int		       	Game::play()
       display();
       usleep((1000000 / 10) * (m_speed / m_speedup));
       m_turn++;
+      std::cout << m_turn << " => " << m_piece.getY() << std::endl;
       if (m_turn % SPEED_UP_DELAY == 0 && m_speed > 1)
 	m_speed--;
     }
@@ -49,6 +50,9 @@ int		       	Game::play()
 
 bool			Game::pieceCanFall() const
 {
+  std::cout << "Tested : "
+	    << m_piece.getMinX() << " | " << m_piece.getMaxX()
+	    << " =||= " << m_piece.getMinY() << " | " << m_piece.getMaxY() << std::endl;
   for (unsigned int i(m_piece.getMinX()) ; i < m_piece.getMaxX() ; ++i)
     for (unsigned int j(m_piece.getMinY()) ; j < m_piece.getMaxY() ; ++j)
       {
@@ -141,7 +145,6 @@ void			Game::cleanLines()
 	    break;
 	  if (i == m_width - 1)
 	    {
-	      std::cout << "Have to del L" << j << std::endl;
 	      for(unsigned int a(0) ; a < m_width ; ++a)
 		m_map[a].erase(m_map[a].begin() + j);
 	      j--;
@@ -167,11 +170,14 @@ bool		Game::pieceCanMove(IControler::e_action a) const
 	return (false);
       d = -1;
     }
-  for (unsigned int i(m_piece.getMinX()) ; i < m_piece.getMaxX() ; ++i)
-    for (unsigned int j(m_piece.getMaxX()) ; j < m_piece.getMaxY() ; ++j)
+  for (int i(0) ; i < MAX_WIDTH ; ++i)
+    for (int j(0) ; j < MAX_HEIGT ; ++j)
       {
-	if (m_piece.getBloc(i, j) && m_map[i + m_piece.getX() + d][j + m_piece.getY()] != Colors::None)
-	  return (false);
+	if ((i + m_piece.getX() + d) >= 0 && (i + m_piece.getX() + d) < (int)m_width)
+	  {
+	    if (m_piece.getBloc(i, j) && m_map[i + m_piece.getX() + d][j + m_piece.getY()] != Colors::None)
+	      return (false);
+	  }
       }
   return (true);
 }

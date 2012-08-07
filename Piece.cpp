@@ -46,7 +46,7 @@ int		Piece::getX() const
   return (m_x);
 }
 
-unsigned int	Piece::getY() const
+int		Piece::getY() const
 {
   return (m_y);
 }
@@ -93,7 +93,6 @@ void		Piece::reset()
       m_shape[i][j] = false;
 
   r = Random::rand(0, 6);
-
   for (int i(0) ; i < MAX_WIDTH ; ++i)
     for (int j(0) ; j < MAX_HEIGT ; ++j)
       {
@@ -110,7 +109,7 @@ void		Piece::display(IView &v, unsigned int yLimit) const
     {
       for (int j(0) ; j < MAX_HEIGT ; ++j)
 	{
-if (m_shape[i][j] && (j + m_y) < yLimit)
+	  if (m_shape[i][j] && (j + m_y) < (int)yLimit)
 	    v.drawBloc(i + m_x, j + m_y, m_color);
 	}
     }
@@ -137,6 +136,7 @@ Piece		&Piece::operator=(const Piece &m)
   m_maxX = m.m_maxX;
   m_maxY = m.m_maxY;
   m_color = m.getColor();
+  calcMaximuns();
   return (*this);
 }
 
@@ -180,4 +180,8 @@ void		Piece::calcMaximuns()
       }
   m_maxX++;
   m_maxY++;
+
+  std::cout << "X : " << m_minX << " | " << m_maxX << std::endl;
+
+
 }

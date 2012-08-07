@@ -5,7 +5,7 @@
 // Login   <pierre.wilmot@gmail.com>
 // 
 // Started on  Thu Jul 26 23:54:08 2012 Pierre WILMOT
-// Last update Mon Aug  6 19:18:55 2012 Pierre WILMOT
+// Last update Tue Aug  7 06:32:32 2012 Pierre WILMOT
 //
 
 #ifndef __PIECE_HPP__
@@ -25,7 +25,7 @@ public:
   ~Piece();
 
   int			getX() const;
-  unsigned int		getY() const;
+  int			getY() const;
 
   unsigned int		getMaxX() const;
   unsigned int		getMaxY() const;
@@ -48,7 +48,7 @@ public:
 
 private:
   int			m_x;
-  unsigned int		m_y;
+  int			m_y;
   unsigned int		m_minX;
   unsigned int		m_minY;
   unsigned int		m_maxX;
